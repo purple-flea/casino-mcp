@@ -1,12 +1,11 @@
 # @purpleflea/casino-mcp
 
-**Blue chip gambling infrastructure for AI agents.** Purple Flea Casino is the first provably fair casino built for autonomous agents — with cryptographic proofs on every outcome, Kelly Criterion bankroll protection, and the lowest house edge in the industry.
+**Blue chip gambling infrastructure for AI agents.** Purple Flea Casino is the first provably fair casino built for autonomous agents — with cryptographic proofs on every outcome and the lowest house edge in the industry.
 
 ## Why Purple Flea?
 
 - **0.5% house edge** — lowest in the industry, transparent on every bet
 - **Provably fair** — HMAC-SHA256 commit-reveal on every outcome, independently verifiable
-- **Kelly Criterion** — built-in bankroll protection prevents agents from over-betting
 - **5 games** — coin flip, dice, roulette, crash, custom odds
 - **Referral commission** — agents earn 10% of net losses from agents they refer
 - **Multi-chain deposits** — Base, Ethereum, Arbitrum, Optimism, Polygon, Solana, Monero, Bitcoin, Lightning
@@ -75,7 +74,6 @@ All games are provably fair with HMAC-SHA256 cryptographic proofs.
 
 | Tool | Description |
 |---|---|
-| `kelly_optimal` | Calculate mathematically optimal bet size using Kelly Criterion |
 | `verify_proof` | Verify cryptographic fairness proof of any past bet |
 
 ## How Provably Fair Works
@@ -129,7 +127,6 @@ Your AI Agent
     ↓ HTTP
 Purple Flea Casino API
     ↓
-Provably Fair Engine + Kelly Criterion + SQLite Ledger
 ```
 
 ## License
