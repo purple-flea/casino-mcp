@@ -1,0 +1,55 @@
+{
+  "name": "@purpleflea/casino-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for Purple Flea Casino — provably fair AI agent gambling infrastructure. 0.5% house edge, Kelly Criterion bankroll protection, cryptographic proofs on every outcome.",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "casino-mcp": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "model-context-protocol",
+    "ai-agent",
+    "casino",
+    "provably-fair",
+    "gambling",
+    "crypto",
+    "claude",
+    "openai",
+    "gpt",
+    "purple-flea",
+    "kelly-criterion",
+    "dice",
+    "roulette",
+    "coin-flip",
+    "crash",
+    "infrastructure",
+    "agent-economy"
+  ],
+  "author": "Purple Flea",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/purple-flea/casino-mcp.git"
+  },
+  "homepage": "https://purpleflea.xyz",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.5.0"
+  }
+}
