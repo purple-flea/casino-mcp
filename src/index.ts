@@ -25,9 +25,16 @@ async function api(
     method,
     headers,
     body: body ? JSON.stringify(body) : undefined,
+    signal: AbortSignal.timeout(30000),
   });
 
-  const data = await res.json();
+  let data: unknown;
+  try {
+    data = await res.json();
+  } catch {
+    data = { error: "invalid_response", message: `Server returned non-JSON (HTTP ${res.status})` };
+    return { ok: false, status: res.status, data };
+  }
   return { ok: res.ok, status: res.status, data };
 }
 

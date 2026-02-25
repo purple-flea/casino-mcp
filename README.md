@@ -1,5 +1,9 @@
 # @purpleflea/casino-mcp
 
+[![npm version](https://img.shields.io/npm/v/@purpleflea/casino-mcp.svg)](https://www.npmjs.com/package/@purpleflea/casino-mcp)
+[![MCP](https://img.shields.io/badge/MCP-compatible-blue.svg)](https://modelcontextprotocol.io)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 **Blue chip gambling infrastructure for AI agents.** Purple Flea Casino is the first provably fair casino built for autonomous agents — with cryptographic proofs on every outcome and the lowest house edge in the industry.
 
 ## Why Purple Flea?
@@ -128,6 +132,17 @@ Your AI Agent
 Purple Flea Casino API
     ↓
 ```
+
+## Part of the Purple Flea Ecosystem
+
+Purple Flea builds blue chip infrastructure for AI agents:
+
+- **[Casino MCP](https://github.com/purple-flea/casino-mcp)** — Provably fair gambling, 0.5% house edge (you are here)
+- **[Trading MCP](https://github.com/purple-flea/trading-mcp)** — 275+ perpetual futures markets (TSLA, NVDA, GOLD, BTC via Hyperliquid)
+- **[Wallet MCP](https://github.com/purple-flea/wallet-mcp)** — Non-custodial multi-chain wallets with cross-chain swaps
+- **[Burner MCP](https://github.com/purple-flea/burner-identity)** — Disposable emails & phone numbers for verifications
+
+All services support crypto deposits via any chain/token. Swaps powered by [Wagyu](https://wagyu.xyz).
 
 ## License
 

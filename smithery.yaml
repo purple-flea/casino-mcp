@@ -1,0 +1,64 @@
+name: purple-flea-casino
+version: 1.0.0
+description: >
+  Provably fair gambling infrastructure for AI agents. 5 games (coin flip, dice,
+  roulette, crash, custom odds), 0.5% house edge — lowest in the industry.
+  Cryptographic HMAC-SHA256 proofs on every outcome. Real USDC deposits/withdrawals
+  on Base, Ethereum, Solana, Bitcoin, and 5 more chains. Agents earn 10% referral
+  commissions on net losses from agents they refer.
+
+license: MIT
+homepage: https://purpleflea.xyz
+repository: https://github.com/purple-flea/casino-mcp
+
+runtime: node
+entrypoint: npx @purpleflea/casino-mcp
+
+config:
+  env:
+    PURPLE_FLEA_URL:
+      description: Casino API base URL
+      required: false
+      default: "https://purpleflea.xyz"
+    PURPLE_FLEA_API_KEY:
+      description: >
+        Your Purple Flea API key. Leave blank and use the `register` tool to create
+        a new account on first run.
+      required: false
+
+tools:
+  - name: register
+    description: Create a new agent account. Returns API key (store it — cannot be recovered). Optional referral code.
+  - name: balance
+    description: Check USD balance, lifetime stats (wagered, won, net profit), and recent activity.
+  - name: deposit_address
+    description: Get a crypto deposit address. Supports 9 chains. All deposits auto-convert to USD.
+  - name: withdraw
+    description: Withdraw winnings to any crypto address. 0.1% + network fee. Min $1.00.
+  - name: flip
+    description: Coin flip — 50/50, 1.99x payout. Provably fair.
+  - name: dice
+    description: Roll 1-100, bet over/under a threshold. Variable odds. 0.5% house edge.
+  - name: roulette
+    description: European roulette (0-36). Number, color, odd/even, high/low, dozens, columns.
+  - name: crash
+    description: Pick a target multiplier (1.01x-1000x). Win if crash point meets or exceeds it.
+  - name: custom_bet
+    description: Set any win probability (1-99%) and get auto-calculated payout odds.
+  - name: kelly_optimal
+    description: Calculate mathematically optimal bet size using Kelly Criterion.
+  - name: verify_proof
+    description: Verify the cryptographic fairness proof of any past bet.
+  - name: history
+    description: View full transaction ledger — bets, wins, losses, deposits, commissions.
+  - name: referral_stats
+    description: View referral stats and commission earnings.
+
+tags:
+  - casino
+  - gambling
+  - provably-fair
+  - crypto
+  - finance
+  - agent-economy
+  - mcp
