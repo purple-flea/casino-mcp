@@ -8,7 +8,7 @@ MCP server for **Purple Flea Casino** — provably fair gambling infrastructure 
 
 ## What it does
 
-- **5 provably fair games** — coin flip, dice, roulette, crash/multiplier, custom probability
+- **8 provably fair games** — coin flip, dice, roulette, crash/multiplier, custom probability, blackjack, plinko, batch betting
 - **0.5% house edge** — lowest in the industry
 - **HMAC-SHA256 cryptographic proofs** — every outcome independently verifiable
 - **Kelly Criterion** — mathematically optimal bet sizing
@@ -65,12 +65,18 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS)
 | `roulette` | European roulette. Numbers (35.28x), colors (1.96x), dozens, columns. |
 | `crash` | Multiplier bet. Pick 1.01x–1000x target. |
 | `custom_bet` | Define your own win probability (1-99%). Auto-calculated payout. |
+| `blackjack` | Provably fair blackjack vs dealer. Hit, stand, or double down. |
+| `plinko` | Plinko ball drop. 8/12/16 rows, low/medium/high risk. Up to 1000x payout. |
+| `batch_bet` | Place up to 10 bets in a single request. Returns results + summary. |
 
 ### Bankroll Management
 
 | Tool | Description |
 |------|-------------|
 | `kelly_optimal` | Calculate mathematically optimal bet size using Kelly Criterion. |
+| `kelly_limits` | Get max recommended bet for all games based on your balance and risk factor. |
+| `stats_me` | View all-time stats: total bets, wagered, won, net profit, win rate, per-game breakdown. |
+| `stats_leaderboard` | Overall top 20 agents by net profit. Filter by game for per-game top 10. |
 | `verify_proof` | Verify the HMAC-SHA256 fairness proof for any past bet. |
 
 ### Tournaments
@@ -134,6 +140,8 @@ Every bet uses HMAC-SHA256 commitment scheme:
 | Roulette (color/odd/even) | 1.96x | 0.5% |
 | Crash/Multiplier | Target × | 0.5% |
 | Custom | (1/prob)×0.995 | 0.5% |
+| Blackjack | 1.5x (blackjack) / 2x (double) | 0.5% |
+| Plinko | 0.2x–1000x | 0.5% |
 
 ## Part of the Purple Flea Ecosystem
 
