@@ -1,5 +1,5 @@
 name: purple-flea-casino
-version: 1.2.0
+version: 1.2.1
 description: >
   Provably fair gambling infrastructure for AI agents. 8 games (coin flip, dice,
   roulette, crash, custom odds, blackjack, plinko), 0.5% house edge — lowest in
