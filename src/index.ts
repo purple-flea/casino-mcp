@@ -634,6 +634,141 @@ server.tool(
   }
 );
 
+// ─── blackjack ───
+
+server.tool(
+  "blackjack",
+  "Play provably fair blackjack at Purple Flea Casino. Hit, stand, or double down to beat the dealer without going over 21. 0.5% house edge. Cryptographic proof on every hand.",
+  {
+    action: z
+      .enum(["hit", "stand", "double"])
+      .describe("Your action: 'hit' for another card, 'stand' to hold, 'double' to double down"),
+    amount: z.number().positive().describe("Bet amount in USD"),
+    client_seed: z
+      .string()
+      .optional()
+      .describe("Your seed for provable fairness verification"),
+  },
+  async ({ action, amount, client_seed }) => {
+    const body: Record<string, unknown> = { action, amount };
+    if (client_seed) body.client_seed = client_seed;
+    const { ok, data } = await api("POST", "/api/v1/games/blackjack", body);
+    return json(data, !ok);
+  }
+);
+
+// ─── plinko ───
+
+server.tool(
+  "plinko",
+  "Drop a ball through a Plinko peg grid. Choose 8, 12, or 16 rows and a risk level. Ball bounces off pegs to land in a multiplier slot. Higher rows and higher risk = bigger potential wins. 0.5% house edge.",
+  {
+    rows: z
+      .enum(["8", "12", "16"])
+      .describe("Number of peg rows. More rows = more variance and extreme payouts."),
+    risk: z
+      .enum(["low", "medium", "high"])
+      .describe("Risk level determines the payout distribution. High risk = rare huge wins, frequent small losses."),
+    amount: z.number().positive().describe("Bet amount in USD"),
+    client_seed: z
+      .string()
+      .optional()
+      .describe("Your seed for provable fairness verification"),
+  },
+  async ({ rows, risk, amount, client_seed }) => {
+    const body: Record<string, unknown> = { rows: Number(rows), risk, amount };
+    if (client_seed) body.client_seed = client_seed;
+    const { ok, data } = await api("POST", "/api/v1/games/plinko", body);
+    return json(data, !ok);
+  }
+);
+
+// ─── batch_bet ───
+
+server.tool(
+  "batch_bet",
+  "Play multiple bets in a single request. Up to 10 bets per batch. More efficient than individual bets. Returns results array and summary (total won, lost, errors). Rate limit: 10 batch calls/min.",
+  {
+    bets: z
+      .array(
+        z.object({
+          game: z.enum(["coin_flip", "dice", "multiplier", "roulette", "custom", "blackjack", "plinko"]),
+          amount: z.number().positive(),
+          side: z.string().optional(),
+          direction: z.string().optional(),
+          threshold: z.number().optional(),
+          target_multiplier: z.number().optional(),
+          bet_type: z.string().optional(),
+          bet_value: z.number().optional(),
+          win_probability: z.number().optional(),
+          action: z.string().optional(),
+          rows: z.number().optional(),
+          risk: z.string().optional(),
+          client_seed: z.string().optional(),
+        })
+      )
+      .min(1)
+      .max(10)
+      .describe("Array of bets to place (1-10 bets). Each bet must include game and amount."),
+  },
+  async ({ bets }) => {
+    const { ok, data } = await api("POST", "/api/v1/bets/batch", { bets });
+    return json(data, !ok);
+  }
+);
+
+// ─── stats_me ───
+
+server.tool(
+  "stats_me",
+  "View your all-time casino statistics: total bets, total wagered, total won, net profit/loss, win rate, and per-game breakdown. Also shows lifetime deposits and withdrawals.",
+  {},
+  async () => {
+    const { ok, data } = await api("GET", "/api/v1/stats/me");
+    return json(data, !ok);
+  }
+);
+
+// ─── stats_leaderboard ───
+
+server.tool(
+  "stats_leaderboard",
+  "View the Purple Flea Casino leaderboard. Overall top 20 agents by net profit. Optionally filter by game to see per-game top 10. Also shows biggest wins across all games.",
+  {
+    game: z
+      .enum([
+        "coin_flip",
+        "dice",
+        "multiplier",
+        "roulette",
+        "custom",
+        "blackjack",
+        "plinko",
+      ])
+      .optional()
+      .describe("Filter leaderboard for a specific game. Omit for overall leaderboard."),
+  },
+  async ({ game }) => {
+    const path = game
+      ? `/api/v1/stats/leaderboard?game=${game}`
+      : "/api/v1/stats/leaderboard";
+    const { ok, data } = await api("GET", path);
+    return json(data, !ok);
+  }
+);
+
+// ─── kelly_limits ───
+
+server.tool(
+  "kelly_limits",
+  "Get Kelly Criterion betting limits for all games based on your current balance and risk factor. Returns the maximum recommended bet for each game. Use this before betting to stay within safe limits.",
+  {},
+  async () => {
+    const { ok, data } = await api("GET", "/api/v1/kelly/limits");
+    return json(data, !ok);
+  }
+);
+
 // ─── Start ───
 
 async function main() {
