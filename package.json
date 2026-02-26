@@ -1,6 +1,6 @@
 {
   "name": "@purpleflea/casino-mcp",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "MCP server for Purple Flea Casino — provably fair AI agent gambling infrastructure. 0.5% house edge, Kelly Criterion bankroll protection, cryptographic proofs on every outcome.",
   "type": "module",
   "main": "dist/index.js",
@@ -16,6 +16,7 @@
     "mcp-server",
     "model-context-protocol",
     "ai-agent",
+    "autonomous-agent",
     "casino",
     "provably-fair",
     "gambling",
@@ -30,7 +31,13 @@
     "coin-flip",
     "crash",
     "infrastructure",
-    "agent-economy"
+    "agent-economy",
+    "langchain",
+    "crewai",
+    "autogpt",
+    "llm-tools",
+    "defi",
+    "web3"
   ],
   "author": "Purple Flea",
   "license": "MIT",
